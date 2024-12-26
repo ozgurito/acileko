@@ -19,6 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _initializeNotifications(); // Bildirimleri başlatıyoruz
+    _loadEarthquakeData(); // Deprem verilerini yükleyeceğiz
   }
 
   // Bildirimleri başlatmak için bir fonksiyon
@@ -27,6 +28,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
     var androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher'); // Uygulama ikonunu ayarlıyoruz
     var initializationSettings = InitializationSettings(android: androidSettings);
     _notifications.initialize(initializationSettings); // Bildirimleri başlatıyoruz
+  }
+
+  // Deprem verilerini API'den çekiyoruz
+  void _loadEarthquakeData() async {
+    // API üzerinden verileri çekiyoruz
+    var data = await ApiService.fetchEarthquakeData();
+
+    setState(() {
+      // Verileri aldıktan sonra state'i güncelliyoruz
+      widget.earthquakes.addAll(data ?? []);
+    });
+
+    if (widget.earthquakes.isNotEmpty) {
+      _showNotification("Yeni Deprem!", "Bir deprem tespit edildi."); // Deprem tespit edilirse bildirim gösteriyoruz
+    }
   }
 
   // Bildirimleri göstermek için bir fonksiyon

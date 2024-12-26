@@ -5,6 +5,7 @@ class ScaffoldTemplate extends StatelessWidget {
   final Widget body; // Ana içerik
   final FloatingActionButton? floatingActionButton; // Opsiyonel FAB
 
+  // Constructor, floatingActionButton parametresi opsiyonel olarak eklenmiştir
   const ScaffoldTemplate({
     Key? key,
     required this.title,

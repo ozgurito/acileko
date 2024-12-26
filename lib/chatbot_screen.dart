@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'api.service.dart';
+import 'package:acileko/utils/api_service.dart';  // Sadece buradaki doğru ApiService'i import edelim
 
 class ChatbotScreen extends StatefulWidget {
   @override

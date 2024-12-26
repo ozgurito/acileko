@@ -1,54 +1,58 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';  // Dosya yolu için
-import 'dart:io';  // Dosya işlemleri için
 
 class ApiService {
-  static const String _baseUrl = 'https://api.orhanaydogdu.com.tr/deprem/kandilli/live';
+  // Kandilli API'si
+  static const String _kandilliBaseUrl = 'https://api.koeri.boun.edu.tr/deprem/data/get'; // Kandilli API'si endpoint
 
-  // Deprem verilerini almak için
+  // OpenAI API'si
+  static const String _openAiBaseUrl = 'https://api.openai.com/v1/completions';
+  static const String _openAiApiKey = 'sk-abc123XYZ456abcd3519...';  // Geçerli API anahtarınız
+
+  // Deprem verilerini almak için metod (Kandilli API)
   static Future<List<dynamic>?> fetchEarthquakeData() async {
     try {
-      final offlineData = await _loadOfflineData();
-      if (offlineData != null) {
-        return offlineData;
-      }
+      final response = await http.get(Uri.parse(_kandilliBaseUrl)); // GET isteği gönderiyoruz
 
-      final response = await http.get(Uri.parse(_baseUrl));
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        // data['result']'in List<dynamic> türünde olduğuna emin olun
-        if (data['result'] != null) {
-          await _saveOfflineData(data['result']);
-          return data['result'];
-        }
+        var data = json.decode(response.body); // API'den gelen JSON verisini çözümlüyoruz
+        return data['result']; // API'den gelen veriden 'result' kısmını alıyoruz
+      } else {
+        print("API çağrısı başarısız oldu: ${response.statusCode}");
         return null;
       }
-      return null;
     } catch (e) {
-      print("Hata: $e");
+      print("API çağrısı sırasında hata: $e");
       return null;
     }
   }
 
-  // Offline veriyi yükleme
-  static Future<List<dynamic>?> _loadOfflineData() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/earthquake_data.json');
+  // Chatbot yanıtını almak için metod (OpenAI GPT-3)
+  static Future<String> getChatbotResponse(String userInput) async {
+    try {
+      final response = await http.post(
+        Uri.parse(_openAiBaseUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $_openAiApiKey',  // OpenAI API anahtarını burada kullanıyoruz
+        },
+        body: json.encode({
+          'model': 'text-davinci-003',  // GPT-3 modelini seçiyoruz
+          'prompt': userInput,
+          'max_tokens': 100,  // Cevap uzunluğu
+          'temperature': 0.7,  // Yanıtın rastgeleliğini ayarlıyoruz
+        }),
+      );
 
-    if (await file.exists()) {
-      final contents = await file.readAsString();
-      return json.decode(contents);
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        return data['choices'][0]['text'].toString().trim();
+      } else {
+        throw Exception('API request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Chatbot API çağrısı sırasında hata: $e");
+      return 'Hata oluştu, lütfen tekrar deneyin.';
     }
-    return null;
   }
-
-  // Offline veriyi kaydetme
-  static Future<void> _saveOfflineData(List<dynamic> data) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/earthquake_data.json');
-    await file.writeAsString(json.encode(data));
-  }
-
-  static getChatbotResponse(String userMessage) {}
 }

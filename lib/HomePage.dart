@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:acileko/utils/api_service.dart'; // API servisi import ediyoruz
+import 'package:acileko/utils/api_service.dart'; // API servisini import ediyoruz
 import 'dashboard_screen.dart';  // Deprem verilerini gösterecek ekran
 import 'chatbot_screen.dart';    // Chatbot ekranını import ediyoruz
 
@@ -46,31 +46,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-
-            // Deprem Bilgisi Kartı
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: ListTile(
-                tileColor: Color(0xFF5A55CA), // Mor renk
-                leading: Icon(
-                  Icons.warning_amber_rounded,
-                  color: Colors.white,
-                  size: 36,
-                ),
-                title: Text(
-                  'Yeni Deprem! Bir deprem tespit edildi.',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-                subtitle: Text(
-                  'Merkez: Narlidere\nBüyüklük: 4.3',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-
             // Menü Butonları
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,18 +106,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Ayarlar',
-          ),
-        ],
       ),
     );
   }
