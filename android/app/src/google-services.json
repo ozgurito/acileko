@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "738826349321",
+    "project_id": "acileko-8636f",
+    "storage_bucket": "acileko-8636f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738826349321:android:af9d8d0453d43415b681d8",
+        "android_client_info": {
+          "package_name": "com.acileko.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaymXsC6oH4Gags_pR9tKAYkyhlyZ2KxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

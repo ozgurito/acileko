@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                   Icons.location_on,
                       () async {
                     // Deprem verilerini API'den çekme
-                    var data = await ApiService.fetchEarthquakeDataForIzmir();  // İzmir depremlerini çekiyoruz
+                    var data = await ApiService.fetchEarthquakeData();
                     // Bu veriyi Dashboard ekranında gösterebiliriz
                     Navigator.push(
                       context,
@@ -131,6 +131,18 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Ana Sayfa',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Ayarlar',
+          ),
+        ],
       ),
     );
   }

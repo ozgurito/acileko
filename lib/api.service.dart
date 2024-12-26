@@ -15,7 +15,7 @@ class ApiService {
       final response = await http.get(Uri.parse(_kandilliBaseUrl)); // GET isteği gönderiyoruz
 
       if (response.statusCode == 200) {
-        var data = json.decode(response.body); // API'den gelen JSON verisini çözümlüyo kodumuz
+        var data = json.decode(response.body); // API'den gelen JSON verisini çözümlüyoruz
         return data['result']; // API'den gelen veriden 'result' kısmını alıyoruz
       } else {
         print("API çağrısı başarısız oldu: ${response.statusCode}");

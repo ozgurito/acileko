@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'utils/api_service.dart'; // ApiService'i import ediyoruz
+import 'utils/api_service.dart'; // API servisi import ediyoruz
 
 class DashboardScreen extends StatefulWidget {
+  final List<dynamic> earthquakes; // Deprem verisi parametresi
+
+  // Constructor ile earthquakes parametresini alıyoruz
+  DashboardScreen({required this.earthquakes});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late FlutterLocalNotificationsPlugin _notifications;
-  List<dynamic> earthquakes = []; // Depremler için bir liste
 
   @override
   void initState() {
     super.initState();
     _initializeNotifications(); // Bildirimleri başlatıyoruz
-    _loadEarthquakeData(); // Deprem verilerini yüklüyoruz
   }
 
   // Bildirimleri başlatmak için bir fonksiyon
@@ -24,15 +27,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     var androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher'); // Uygulama ikonunu ayarlıyoruz
     var initializationSettings = InitializationSettings(android: androidSettings);
     _notifications.initialize(initializationSettings); // Bildirimleri başlatıyoruz
-  }
-
-  // Deprem verilerini API'den çekiyoruz
-  void _loadEarthquakeData() async {
-    earthquakes = await ApiService.fetchEarthquakeData() ?? []; // ApiService'den veri çekiyoruz
-    setState(() {}); // Ekranı güncelliyoruz
-    if (earthquakes.isNotEmpty) {
-      _showNotification("Yeni Deprem!", "Bir deprem tespit edildi."); // Deprem tespit edilirse bildirim gösteriyoruz
-    }
   }
 
   // Bildirimleri göstermek için bir fonksiyon
@@ -48,15 +42,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Eğer deprem verisi boşsa, bir loading spinner'ı gösteriyoruz.
+    if (widget.earthquakes.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Deprem Bilgisi Uygulaması"),
+          centerTitle: true,
+        ),
+        body: Center(child: CircularProgressIndicator()), // Veri yükleniyor göstergesi
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Deprem Bilgisi Uygulaması"),
         centerTitle: true,
       ),
-      body: earthquakes.isEmpty
-          ? Center(child: CircularProgressIndicator()) // Veri yükleniyor ise bir loading göstergesi
-          : ListView.builder(
-        itemCount: earthquakes.length, // Depremler listesine göre item sayısını belirliyoruz
+      body: ListView.builder(
+        itemCount: widget.earthquakes.length, // Depremler listesine göre item sayısını belirliyoruz
         itemBuilder: (context, index) {
           return Card(
             elevation: 3,
@@ -66,7 +69,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 'Deprem ${index + 1}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ), // Depremin sırasını yazdırıyoruz
-              subtitle: Text('Konum: ${earthquakes[index]["location"]}'), // Deprem yerini yazdırıyoruz
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Konum: ${widget.earthquakes[index]["location"]}'), // Deprem yerini yazdırıyoruz
+                  Text('Büyüklük: ${widget.earthquakes[index]["magnitude"]}'), // Deprem büyüklüğünü yazdırıyoruz
+                  Text('Zaman: ${widget.earthquakes[index]["time"]}'), // Deprem zamanını yazdırıyoruz
+                ],
+              ),
             ),
           );
         },
