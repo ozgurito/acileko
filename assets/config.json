@@ -1,0 +1,15 @@
+{
+  "offlineMode": true,
+  "notifications": {
+    "enabled": true,
+    "type": "local",
+    "interval": "5m",
+    "priority": "high"
+  },
+  "data": {
+    "earthquake": {
+      "url": "https://api.orhanaydogdu.com.tr/deprem/kandilli/live",
+      "cacheDuration": "24h"
+    }
+  }
+}

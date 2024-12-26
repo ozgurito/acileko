@@ -1,0 +1,36 @@
+plugins {
+    id 'com.android.application'  // Uygulama modülünü ekliyoruz
+    id 'com.google.gms.google-services'  // Google Services plugin'i ekliyoruz
+}
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.acileko.myapp"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    // Firebase BoM (Bill of Materials) ekliyoruz
+    implementation platform('com.google.firebase:firebase-bom:33.6.0')
+
+    // Firebase Analytics ve Database SDK'larını ekliyoruz
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database'
+
+    // Diğer Firebase SDK'ları eklemek isterseniz:
+    // Örneğin, Firebase Auth ve Firestore
+    // implementation 'com.google.firebase:firebase-auth'
+    // implementation 'com.google.firebase:firebase-firestore'
+}
