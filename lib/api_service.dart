@@ -1,6 +1,6 @@
 import 'dart:convert';  // json.decode için gerekli
 import 'package:http/http.dart' as http;  // HTTP istekleri için
-
+//BU CLASS KULLANILMIYOR//
 class ApiService {
   // Kandilli API'si
   static const String _kandilliBaseUrl = 'https://api.koeri.boun.edu.tr/deprem/data/get'; // Kandilli API'si endpoint
@@ -83,11 +83,5 @@ class ApiService {
       print("Prediction API çağrısı sırasında hata: $e");
       return -1;  // Hata durumunda -1 dönebiliriz.
     }
-  }
-
-  // Yazılmış olan API'yi düzgün şekilde kullanmaya yönelik yardımcı metod
-  static Future<void> fetchEarthquakeDataAndUpdate() async {
-    var earthquakeData = await fetchEarthquakeData();
-    // Bu veriyle ne yapılması gerektiğine göre buraya ekleme yapılabilir
   }
 }

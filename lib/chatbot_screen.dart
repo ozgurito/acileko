@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:acileko/utils/api_service.dart';  // Sadece buradaki doğru ApiService'i import edelim
 
 class ChatbotScreen extends StatefulWidget {
   @override
@@ -7,52 +6,100 @@ class ChatbotScreen extends StatefulWidget {
 }
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
-  final TextEditingController _controller = TextEditingController();
-  final List<Map<String, String>> _messages = [];
-  bool _isLoading = false;
+  final TextEditingController _controller = TextEditingController();  // Kullanıcı mesajı
+  final List<Map<String, String>> _messages = [];  // Mesajlar listesi
+  bool _isLoading = false;  // Yükleme durumu
 
-  void _sendMessage() async {
-    if (_controller.text.isNotEmpty) {
-      String userMessage = _controller.text;
+  // Chatbot yanıtlarını ekle
+  void _sendMessage(String userMessage) async {
+    setState(() {
+      _messages.add({'sender': 'user', 'message': userMessage});  // Kullanıcı mesajını ekle
+      _isLoading = true;
+    });
 
+    _controller.clear();  // Mesaj kutusunu temizle
+
+    try {
+      String botResponse = getBotResponse(userMessage);
       setState(() {
-        _messages.add({'sender': 'user', 'message': userMessage});
-        _isLoading = true;
+        _messages.add({'sender': 'bot', 'message': botResponse});  // Bot mesajını ekle
       });
-
-      _controller.clear();
-
-      try {
-        var response = await ApiService.getChatbotResponse(userMessage);
-        setState(() {
-          _messages.add({'sender': 'bot', 'message': response});
-        });
-      } catch (error) {
-        setState(() {
-          _messages.add({
-            'sender': 'bot',
-            'message': 'Bir hata oluştu. Lütfen tekrar deneyin.'
-          });
-        });
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+    } catch (error) {
+      setState(() {
+        _messages.add({'sender': 'bot', 'message': 'Bir hata oluştu, lütfen tekrar deneyin.'});
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
+  }
+
+  // Bot yanıtlarını manuel olarak oluşturduk
+  String getBotResponse(String message) {
+    if (message.toLowerCase().contains("ne zaman deprem oldu")) {
+      return "Son deprem bilgileri Kandilli Rasathanesi'nden alınmıştır. Bugün saat 14:32'de İzmir'in Narlıdere ilçesinde 4.3 büyüklüğünde bir deprem meydana gelmiştir. Bu büyüklükteki bir deprem yer yüzeyinde önemli değişikliklere neden olmasa da yer altındaki yapılar üzerinde bazı sarsıntılara yol açabilir. Her zaman tetikte olun ve güvenli alanları belirleyin.";
+    } else if (message.toLowerCase().contains("ne yapmalıyız")) {
+      return "Deprem sırasında yapılması gerekenler, yaşamınızı korumak açısından kritik öneme sahiptir. Deprem başladığında:\n\n1. Sakin olun, panik yapmayın.\n2. Yüksek yerlerden ve camlardan uzaklaşın. Güvenli bir alana sığının.\n3. Sakın panikle hareket etmeyin. Eğer dışarıdaysanız, binalardan uzak durun.\n4. Başınızı koruyun. Deprem bittikten sonra güvenli bir alanı terk edin.";
+    } else if (message.toLowerCase().contains("acileko nedir")) {
+      return "AcilEko, gelişmiş bir deprem tahmin ve kriz yönetimi sistemidir. Bu uygulama, deprem anında en güvenli yolları belirlemenizi sağlar, en hızlı tahliye rotalarını sunar ve yerel yetkililer tarafından gönderilen gerçek zamanlı deprem verilerini kullanıcıya iletir. AcilEko, aynı zamanda binaların acil çıkış planlarını içerir ve kriz anlarında sizi yönlendirir.";
+    } else if (message.toLowerCase().contains("deprem sigortası yaptırmalı mıyım")) {
+      return "Evet, deprem sigortası, deprem nedeniyle oluşabilecek büyük maddi kayıplara karşı bir güvence sağlar. Türkiye, deprem riski yüksek bir bölge olduğundan, evinizi veya iş yerinizi sigortalatmak, meydana gelebilecek bir felakette maddi açıdan sizi rahatlatacaktır. Zorunlu deprem sigortası (DASK) kapsamında olmasa dahi, özel sigorta şirketleri tarafından sağlanan teminatları inceleyebilirsiniz.";
+    } else if (message.toLowerCase().contains("deprem sonrası ne yapmalıyım")) {
+      return "Deprem sonrasında ilk adım, sağlığınızın kontrolünü sağlamaktır. Güvenli bir alanda olduğunuzu doğruladıktan sonra:\n\n1. Elektrik ve gaz vanalarını kapatın.\n2. Bina hasarını kontrol edin. Çatlaklar ve devrilen eşyalar varsa, güvenli bir şekilde binayı terk edin.\n3. İletişim hatları yoğun olabileceğinden acil yardım numaralarına başvurun.\n4. Sizi ve sevdiklerinizi güvende tutun.";
+    } else {
+      return "Bilmiyorum, ancak size yardımcı olabilecek başka bir konuda yardımcı olabilirim. Lütfen sorunuzu tekrar edin.";
+    }
+  }
+
+  // Menüdeki soruları seçme
+  void _handleMenuSelection(String selection) {
+    _sendMessage(selection);  // Seçilen soruya yanıtı gönder
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chatbot'),
+        title: Text('AcilEko Chatbot'),
         centerTitle: true,
+        backgroundColor: Color(0xFF5A55CA),  // Başlık rengi
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // Menü seçenekleri
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.only(bottom: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _handleMenuSelection('Son Deprem Ne Zaman Oldu?'),
+                    child: Text('Son Deprem Ne Zaman Oldu?'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleMenuSelection('Deprem Anında Ne Yapmalıyız?'),
+                    child: Text('Deprem Anında Ne Yapmalıyız?'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleMenuSelection('AcilEko Nedir?'),
+                    child: Text('AcilEko Nedir?'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleMenuSelection('Deprem Sigortası Yaptırmalı Mıyım?'),
+                    child: Text('Deprem Sigortası Yaptırmalı Mıyım?'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleMenuSelection('Deprem Sonrası Ne Yapmalıyım?'),
+                    child: Text('Deprem Sonrası Ne Yapmalıyım?'),
+                  ),
+                ],
+              ),
+            ),
+            // Mesajlar listesi
             Expanded(
               child: ListView.builder(
                 itemCount: _messages.length,
@@ -83,7 +130,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                 },
               ),
             ),
-            if (_isLoading) CircularProgressIndicator(),
+            if (_isLoading) CircularProgressIndicator(),  // Yükleme göstergesi
             Row(
               children: [
                 Expanded(
@@ -91,12 +138,17 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                     controller: _controller,
                     decoration: InputDecoration(
                       hintText: 'Sorunuzu yazın...',
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                     ),
                   ),
                 ),
                 IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: _sendMessage,
+                  onPressed: () => _sendMessage(_controller.text),  // Kullanıcı mesajını gönder
                 ),
               ],
             ),

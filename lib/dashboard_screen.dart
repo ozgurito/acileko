@@ -1,6 +1,8 @@
+import 'dart:typed_data'; // Int64List kullanabilmek için gerekli
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'utils/api_service.dart'; // API servisi import ediyoruz
+import 'package:acileko/utils/api_service.dart'; // API servisi
 
 class DashboardScreen extends StatefulWidget {
   final List<dynamic> earthquakes; // Deprem verisi parametresi
@@ -19,7 +21,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _initializeNotifications(); // Bildirimleri başlatıyoruz
-    _loadEarthquakeData(); // Deprem verilerini yükleyeceğiz
   }
 
   // Bildirimleri başlatmak için bir fonksiyon
@@ -30,28 +31,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _notifications.initialize(initializationSettings); // Bildirimleri başlatıyoruz
   }
 
-  // Deprem verilerini API'den çekiyoruz
-  void _loadEarthquakeData() async {
-    // API üzerinden verileri çekiyoruz
-    var data = await ApiService.fetchEarthquakeData();
-
-    setState(() {
-      // Verileri aldıktan sonra state'i güncelliyoruz
-      widget.earthquakes.addAll(data ?? []);
-    });
-
-    if (widget.earthquakes.isNotEmpty) {
-      _showNotification("Yeni Deprem!", "Bir deprem tespit edildi."); // Deprem tespit edilirse bildirim gösteriyoruz
-    }
-  }
-
   // Bildirimleri göstermek için bir fonksiyon
   Future<void> _showNotification(String title, String body) async {
+    // Int64List türü ile vibrationPattern oluşturuluyor
+    var vibrationPattern = Int64List.fromList([0, 1000, 500, 1000]); // Titreşim deseni
+
     var androidDetails = AndroidNotificationDetails(
-      'earthquake_channel', 'Earthquake Alerts',
+      'earthquake_channel',
+      'Earthquake Alerts',
       importance: Importance.high,
       priority: Priority.high,
-    ); // Bildirimin detaylarını ayarlıyoruz
+      playSound: true,  // Sesli bildirim
+      enableVibration: true,  // Titreşim aktif
+      vibrationPattern: vibrationPattern,  // Int64List olarak titreşim deseni
+    );
     var platformDetails = NotificationDetails(android: androidDetails);
     await _notifications.show(0, title, body, platformDetails); // Bildirimi gösteriyoruz
   }
@@ -77,6 +70,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: ListView.builder(
         itemCount: widget.earthquakes.length, // Depremler listesine göre item sayısını belirliyoruz
         itemBuilder: (context, index) {
+          var earthquake = widget.earthquakes[index];
+          var magnitude = earthquake["magnitude"];
+
+          if (magnitude >= 3.0) {
+            // Eğer deprem büyüklüğü 3.0 ve üzerinde ise bildirim gönderiyoruz
+            _showNotification(
+                'Yeni Deprem! ${earthquake["location"]}',
+                'Büyüklük: $magnitude, Zaman: ${earthquake["time"]}'
+            );
+          }
+
           return Card(
             elevation: 3,
             margin: EdgeInsets.all(8.0),
@@ -88,9 +92,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Konum: ${widget.earthquakes[index]["location"]}'), // Deprem yerini yazdırıyoruz
-                  Text('Büyüklük: ${widget.earthquakes[index]["magnitude"]}'), // Deprem büyüklüğünü yazdırıyoruz
-                  Text('Zaman: ${widget.earthquakes[index]["time"]}'), // Deprem zamanını yazdırıyoruz
+                  Text('Konum: ${earthquake["location"]}'), // Deprem yerini yazdırıyoruz
+                  Text('Büyüklük: $magnitude'), // Deprem büyüklüğünü yazdırıyoruz
+                  Text('Zaman: ${earthquake["time"]}'), // Deprem zamanını yazdırıyoruz
                 ],
               ),
             ),

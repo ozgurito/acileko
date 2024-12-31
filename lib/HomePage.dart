@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:acileko/utils/api_service.dart'; // API servisini import ediyoruz
 import 'dashboard_screen.dart';  // Deprem verilerini gösterecek ekran
 import 'chatbot_screen.dart';    // Chatbot ekranını import ediyoruz
+import 'earthquake_guide_screen.dart';  // Deprem Yönergesi Sayfası
+import 'exit_plan_screen.dart';  // Acil çıkış planı sayfası
+import 'earthquake_prediction_screen.dart';  // Deprem tahmini ekranı
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,15 +46,17 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                   SizedBox(height: 10),
+                  // Bugünün tarihini alıyoruz
                   Text(
-                    'Perşembe 20 Aralık',
+                    _getFormattedDate(),
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
               ),
             ),
             SizedBox(height: 20),
-            // Menü Butonları
+
+            // Menü Butonları (5 Seçenek)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,6 +84,10 @@ class HomePage extends StatelessWidget {
                   Icons.school,
                       () {
                     // Acil çıkış planı sayfasına yönlendirme
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExitPlanScreen()),
+                    );
                   },
                 ),
               ],
@@ -82,6 +96,18 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                _buildMenuButton(
+                  context,
+                  'Deprem Tahmini',
+                  Icons.pie_chart,
+                      () {
+                    // Deprem tahmini sayfasına yönlendirme
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EarthquakePredictionScreen()),
+                    );
+                  },
+                ),
                 _buildMenuButton(
                   context,
                   'ChatBot Mesaj yaz..',
@@ -94,12 +120,22 @@ class HomePage extends StatelessWidget {
                     );
                   },
                 ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 _buildMenuButton(
                   context,
                   'Deprem Yönergesi',
                   Icons.book,
                       () {
                     // Deprem yönergesi sayfasına yönlendirme
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EarthquakeGuideScreen()),
+                    );
                   },
                 ),
               ],
@@ -143,5 +179,44 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Bugün tarihi (gün, ay ve hafta günü) formatında almak için fonksiyon
+  String _getFormattedDate() {
+    DateTime now = DateTime.now();
+    return "${now.day} ${_getMonthName(now.month)} ${_getWeekDayName(now.weekday)}"; // Gün, ay, ve hafta günü
+  }
+
+  // Ay ismini alır
+  String _getMonthName(int month) {
+    switch (month) {
+      case 1: return 'Ocak';
+      case 2: return 'Şubat';
+      case 3: return 'Mart';
+      case 4: return 'Nisan';
+      case 5: return 'Mayıs';
+      case 6: return 'Haziran';
+      case 7: return 'Temmuz';
+      case 8: return 'Ağustos';
+      case 9: return 'Eylül';
+      case 10: return 'Ekim';
+      case 11: return 'Kasım';
+      case 12: return 'Aralık';
+      default: return '';
+    }
+  }
+
+  // Haftanın günü ismini alır (Pazar - Cumartesi)
+  String _getWeekDayName(int weekday) {
+    switch (weekday) {
+      case 1: return 'Pazartesi';
+      case 2: return 'Salı';
+      case 3: return 'Çarşamba';
+      case 4: return 'Perşembe';
+      case 5: return 'Cuma';
+      case 6: return 'Cumartesi';
+      case 7: return 'Pazar';
+      default: return '';
+    }
   }
 }
