@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:acileko/utils/api_service.dart'; // API servisini import ediyoruz
-import 'dashboard_screen.dart';  // Deprem verilerini gösterecek ekran
-import 'chatbot_screen.dart';    // Chatbot ekranını import ediyoruz
-import 'earthquake_guide_screen.dart';  // Deprem Yönergesi Sayfası
+import 'earthquake_data_screen.dart'; // EarthquakeDataScreen import ediyoruz
 import 'exit_plan_screen.dart';  // Acil çıkış planı sayfası
 import 'earthquake_prediction_screen.dart';  // Deprem tahmini ekranı
+import 'chatbot_screen.dart';    // Chatbot ekranını import ediyoruz
+import 'earthquake_guide_screen.dart';  // Deprem Yönergesi Sayfası
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,15 +15,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AcilEko'),
         backgroundColor: Color(0xFF5A55CA), // Mor tonlarında bir renk
-        centerTitle: true,
+        title: Row(
+          children: [
+            // "AcilEko" yazısı
+            Text(
+              'AcilEko',
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+            // Boşluk
+            SizedBox(width: 10),
+            // Logo sol tarafta
+            Image.asset(
+              'assets/IEU.PNG',  // Logo'nun path'i
+              width: 40,  // Logo boyutunu ayarlayabilirsiniz
+            ),
+          ],
+        ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              // Bildirimler için bir işlem yapılabilir
-            },
+          // Bildirim ikonunu eklemeye devam ediyoruz
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.notifications),
           ),
         ],
       ),
@@ -39,14 +51,16 @@ class _HomePageState extends State<HomePage> {
                 color: Color(0xFF5A55CA), // Mor renk
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Column(
+              child: Row(
                 children: [
+                  // Hoşgeldiniz kısmı
                   Text(
                     'Merhaba, Hoşgeldiniz 👋',
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
-                  SizedBox(height: 10),
-                  // Bugünün tarihini alıyoruz
+                  // Boşluk
+                  SizedBox(width: 10),
+                  // Bugünün tarihini ekliyoruz
                   Text(
                     _getFormattedDate(),
                     style: TextStyle(color: Colors.white, fontSize: 18),
@@ -62,19 +76,13 @@ class _HomePageState extends State<HomePage> {
               children: [
                 _buildMenuButton(
                   context,
-                  'İzmir Son Depremler',
+                  'Son Depremler',
                   Icons.location_on,
-                      () async {
-                    // Deprem verilerini API'den çekme
-                    var data = await ApiService.fetchEarthquakeData();
-                    // Bu veriyi Dashboard ekranında gösterebiliriz
+                      () {
+                    // Son depremler ekranına yönlendirme
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => DashboardScreen(
-                          earthquakes: data ?? [], // Data verisi burada veriliyor
-                        ),
-                      ),
+                      MaterialPageRoute(builder: (context) => EarthquakeDataScreen()),
                     );
                   },
                 ),

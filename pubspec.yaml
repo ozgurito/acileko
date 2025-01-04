@@ -10,13 +10,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_document_picker: 5.2.3
   flutter_local_notifications: ^18.0.1  # Güncel sürüm
   firebase_core: ^3.9.0                 # Güncel sürüm
   firebase_auth: ^5.3.4                 # Güncel sürüm
   firebase_messaging: ^15.1.6           # Güncel sürüm
-  http: ^1.2.2                          # HTTP request
+  http: ^1.2.2       # HTTP request
+  json_annotation: ^4.4.0
   path_provider: ^2.1.5                 # Uyumluluk için uygun sürüm
   cloud_firestore: ^5.6.0
+  xml: 6.5.0
+  archive: ^4.0.2
+
+
 
 
 dev_dependencies:
@@ -28,3 +34,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/config.json  # JSON dosyasını burada dahil ettik
+    - assets/KAT1.jpeg    # 1. Kat görseli
+    - assets/KAT2.jpeg    # 2. Kat görseli
+    - assets/KAT3.jpeg    # 3. Kat görseli
+    - assets/KAT4.jpeg    # 4. Kat görseli
+    - assets/KAT5.jpeg    # 5. Kat görseli
+    - assets/ZEMİN.jpeg   # Zemin kat görseli
+    - assets/son depremler.xml
+    - assets/IEU.png

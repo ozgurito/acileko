@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ExitPlanScreen extends StatelessWidget {
-  // Pop-up fonksiyonu, her sınıf için çıkış planını gösterir
-  void _showExitPlan(BuildContext context, String className, String exitName, int capacity, String alternativeExit) {
+  // Pop-up fonksiyonu, her sınıf için çıkış planını ve kat kroki görselini gösterir
+  void _showExitPlan(BuildContext context, String className, String exitName, int capacity, String alternativeExit, int timeExit, int timeAlternativeExit) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -13,14 +13,37 @@ class ExitPlanScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Uygun çıkış: $exitName'),
-              Text('Kapasite: $capacity kişi'),
               Text('Alternatif çıkış: $alternativeExit'),
+              Text('Sınıf Kapasitesi: $capacity kişi'),
+              Text('Uygun çıkışdan bir kişi için tahmini tahliye süresi(saniye) : $timeExit'),
+              Text('Alternatif çıkışdan bir kişi için tahmini tahliye süresi(saniye) : $timeAlternativeExit'),
               SizedBox(height: 20),
               Text('Acil durumlar için önerilen çıkış planı şu şekildedir:'),
               Text('1. Sınıfın kapasitesine göre en hızlı çıkışı kullanın.'),
               Text('2. Yoğunluk durumunda alternatif çıkışa yönelin.'),
             ],
           ),
+          actions: [
+            TextButton(
+              child: Text('Kapat'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Pop-up ile kat kroki görselini göstermek için fonksiyon
+  void _showFloorPlan(BuildContext context, String imagePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Kat Krokisi'),
+          content: Image.asset(imagePath),  // Resmi pop-up'ta göster
           actions: [
             TextButton(
               child: Text('Kapat'),
@@ -53,6 +76,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'DERSLİKLER M501-M511',
                 'MYO FOTOĞRAF VE ÇEKİM STÜDYOSU M501',
               ],
+              'assets/KAT5.jpeg', // 5. Kat görseli
             ),
             _buildFloorSection(
               context,
@@ -65,6 +89,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'DERSLİK M405',
                 'DERSLİK M406',
               ],
+              'assets/KAT4.jpeg', // 4. Kat görseli
             ),
             _buildFloorSection(
               context,
@@ -77,6 +102,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'DERSLİK M305',
                 'DERSLİK M306',
               ],
+              'assets/KAT3.jpeg', // 3. Kat görseli
             ),
             _buildFloorSection(
               context,
@@ -89,6 +115,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'DERSLİK M205',
                 'DERSLİK M206',
               ],
+              'assets/KAT2.jpeg', // 2. Kat görseli
             ),
             _buildFloorSection(
               context,
@@ -102,6 +129,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'MYO HAVACILIK PROGRAMLARI UYGULAMA SINIFI M104',
                 'SBF FTR MANUEL TERAPİ LABORATUVARI M105',
               ],
+              'assets/KAT1.jpeg', // 1. Kat görseli
             ),
             _buildFloorSection(
               context,
@@ -112,24 +140,7 @@ class ExitPlanScreen extends StatelessWidget {
                 'DERSLİK M01',
                 'KANTİN',
               ],
-            ),
-            _buildFloorSection(
-              context,
-              'Bodrum Kat',
-              [
-                'MF MAKİNA İMALAT LABORATUVARI',
-                'BİLGİSAYAR LABORATUVARLARI MB160-MB161',
-                'OFİSLER MB157-MB169',
-              ],
-            ),
-            _buildFloorSection(
-              context,
-              'Bodrum Kat 2',
-              [
-                'UBYO GASTRONOMİ VE MUTFAK SANATLARI EĞİTİM MUTFAKLARI',
-                'DERSLİK MB202',
-                'OFİSLER',
-              ],
+              'assets/ZEMİN.jpeg', // Zemin kat görseli
             ),
           ],
         ),
@@ -138,7 +149,7 @@ class ExitPlanScreen extends StatelessWidget {
   }
 
   // Kat için listeyi oluşturuyoruz
-  Widget _buildFloorSection(BuildContext context, String floor, List<String> rooms) {
+  Widget _buildFloorSection(BuildContext context, String floor, List<String> rooms, String imagePath) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 10),
       elevation: 5,
@@ -162,7 +173,9 @@ class ExitPlanScreen extends StatelessWidget {
                     // Sınıf adına tıklanınca uygun çıkış planını gösteriyoruz
                     String exitName = "Büyük merdivenden çıkış"; // Varsayılan çıkış
                     String alternativeExit = "Küçük merdivenden çıkış"; // Varsayılan alternatif çıkış
-                    int capacity = 100; // Varsayılan kapasite
+                    int capacity = 35; // Varsayılan kapasite
+                    int timeExit = 119; //uygun çıkış tahliye süresi
+                    int timeAlternativeExit  = 122; //alternatif çıkış tahliye süresi
 
                     // Belirli sınıflar için çıkış rotaları ve kapasiteyi ayarlıyoruz
                     if (room.contains("M401") || room.contains("M402") || room.contains("M405") || room.contains("M406") ||
@@ -176,11 +189,18 @@ class ExitPlanScreen extends StatelessWidget {
                     }
 
                     // Pop-up ile çıkış planını gösteriyoruz
-                    _showExitPlan(context, room, exitName, capacity, alternativeExit);
+                    _showExitPlan(context, room, exitName, capacity, alternativeExit, timeExit, timeAlternativeExit);
                   },
                 );
               })
                   .toList(),
+            ),
+            // Kat kroki görselini gösteren buton
+            TextButton(
+              onPressed: () {
+                _showFloorPlan(context, imagePath); // Kat kroki görselini aç
+              },
+              child: Text('Kat Krokisi Görüntüle', style: TextStyle(color: Colors.blue)),
             ),
           ],
         ),

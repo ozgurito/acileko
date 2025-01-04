@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Firebase'i başlatmak için
+import 'HomePage.dart';
 import 'firebase_options.dart'; // Firebase yapılandırma bilgilerini içeren dosya
-import 'HomePage.dart'; // HomePage sınıfını import ediyoruz
+import 'earthquake_list_screen.dart'; // Earthquake listesi için ekranı import ediyoruz
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(), // HomePage widget'ını doğru şekilde çağırıyoruz
+      // Ana sayfa olarak HomePage'i tanımlıyoruz
+      home: HomePage(),
     );
   }
 }

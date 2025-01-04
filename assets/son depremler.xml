@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" office:version="1.2">
+  <office:font-face-decls>
+    <style:font-face style:name="Courier New" style:font-family-generic="modern" style:font-pitch="fixed" svg:font-family="'Courier New'" />
+  </office:font-face-decls>
+  <office:automatic-styles>
+    <style:style style:name="T1" style:family="text"><style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold" /></style:style>
+    <style:style style:name="fr2" style:family="graphic" style:parent-style-name="Formula"><style:graphic-properties style:vertical-pos="middle" style:vertical-rel="text" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:wrap="none" /></style:style>
+    <style:style style:name="fr1" style:family="graphic" style:parent-style-name="Formula"><style:graphic-properties style:vertical-pos="middle" style:vertical-rel="text" /></style:style>
+  </office:automatic-styles>
+<office:body>
+<office:text>
+<text:p text:style-name="Text_20_body"><text:span text:style-name="T1">..................TÜRKİYE
+VE YAKIN ÇEVRESİNDEKİ SON
+DEPREMLER....................</text:span></text:p>
+<text:p text:style-name="Text_20_body">Tarih Saat Enlem(N) Boylam(E)
+Derinlik(km) MD ML Mw Yer</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 21:05:04 38.5052
+28.2752 8.5 -.- 1.7 -.- DURASILLI-SALIHLI (MANISA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 20:53:38 38.2228
+38.4927 12.8 -.- 1.4 -.- GULUMUSAGI-(MALATYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 20:51:03 37.4475
+37.2685 15.1 -.- 1.2 -.- DAMLATAS-PAZARCIK</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 20:36:23 36.4827
+31.8605 14.5 -.- 2.1 -.- ALANYA ACIKLARI-ANTALYA</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 20:11:22 37.8657
+26.9960 9.0 -.- 1.9 -.- KUSADASI KORFEZI (EGE DENIZI)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 19:59:41 39.4050
+24.9293 8.7 -.- 2.2 -.- EGE DENIZI</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 19:53:22 39.2927
+28.6735 5.4 -.- 3.2 3.1 KIZILCIK-SIMAV (KUTAHYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 19:37:55 37.1922
+44.8002 16.1 -.- 2.3 -.- ALAN-SEMDINLI (HAKKARI)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 19:31:12 38.8850
+31.6053 5.3 -.- 1.2 -.- PIRIBEYLI-YUNAK (KONYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 19:15:29 36.2843
+27.0042 7.9 -.- 1.9 -.- AKDENIZ</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 18:50:29 38.7328
+37.4468 21.7 -.- 1.6 -.- AGACLI-GURUN (SIVAS)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 18:36:10 36.5022
+31.9835 9.7 -.- 2.1 -.- ALANYA (ANTALYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 18:35:23 38.4400
+40.2128 5.0 -.- 1.6 -.- KELEKCI-DICLE (DIYARBAKIR)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 18:22:17 37.8942
+36.4407 16.8 -.- 1.5 -.- BUYUKCAMURLU-GOKSUN</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:40:05 37.8833
+29.2902 13.1 -.- 1.2 -.- KARAPINAR-CAL (DENIZLI)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:33:26 35.2642
+24.2458 5.0 -.- 3.4 -.- GIRIT ADASI (AKDENIZ)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:25:07 36.5043
+32.0210 12.7 -.- 1.8 -.- TOSMUR-ALANYA (ANTALYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:23:51 36.5090
+31.9523 20.6 -.- 1.1 -.- ALANYA (ANTALYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:21:53 36.5220
+32.0383 17.6 -.- 1.9 -.- TOSMUR-ALANYA (ANTALYA)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 17:19:28 38.1243
+37.0260 10.8 -.- 1.6 -.- CALIS-ELBISTAN (KAHRAMANMARAS)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 16:58:33 38.1823
+36.6495 13.3 -.- 1.9 -.- ESENKOY-GOKSUN</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 16:51:03 36.4400
+31.9283 12.0 -.- 4.6 4.5 ALANYA ACIKLARI-ANTALYA</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 16:39:52 37.9200
+36.6205 9.2 -.- 2.3 -.- TEKIR-(KAHRAMANMARAS)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 16:31:27 37.8635
+29.2812 9.4 -.- 1.8 -.- GURLEYIK-HONAZ (DENIZLI)</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 16:04:35 38.0930
+37.2523 2.5 -.- 3.0 -.- GUMUSDOVEN-ELBISTAN</text:p>
+<text:p text:style-name="Text_20_body">2025.01.03 15:31:20 37.4153
+37.0805 9.1 -.- 1.2 -.- DENIZLI-PAZARCIK</text:p>
+</office:text>
+</office:body>
+</office:document-content>

@@ -1,6 +1,8 @@
 import 'dart:convert';  // json.decode için gerekli
 import 'package:http/http.dart' as http;  // HTTP istekleri için
 //BU CLASS KULLANILMIYOR//
+import 'package:flutter/material.dart';
+
 class ApiService {
   // Kandilli API'si
   static const String _kandilliBaseUrl = 'https://api.koeri.boun.edu.tr/deprem/data/get'; // Kandilli API'si endpoint

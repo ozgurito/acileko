@@ -57,7 +57,7 @@ class EarthquakeGuideScreen extends StatelessWidget {
               '• Yangın ve Acil Durum: 110\n'
                   '• Sağlık ve Ambulans: 112\n'
                   '• Belediye İtfaiye: 115\n'
-                  '• Üniversite Acil Durum İletişimi: (Üniversite telefon hattı)',
+                  '• Üniversite Acil Durum İletişimi: (0 (232) 279 25 25)',
               Icons.phone,
               Colors.blueAccent,
             ),
