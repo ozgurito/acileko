@@ -1,20 +1,20 @@
-import 'package:flutter/services.dart'; // Assets erişimi için gerekli
 import 'package:flutter/material.dart';
-import 'package:xml/xml.dart';
+import 'package:flutter/services.dart';
+import 'package:xml/xml.dart' as xml;
 
-class EarthquakeDataScreen extends StatefulWidget {
+class EarthquakeListScreen extends StatefulWidget {
   @override
-  _EarthquakeDataScreenState createState() => _EarthquakeDataScreenState();
+  _EarthquakeListScreenState createState() => _EarthquakeListScreenState();
 }
 
-class _EarthquakeDataScreenState extends State<EarthquakeDataScreen> {
-  List<String> earthquakeData = [];
+class _EarthquakeListScreenState extends State<EarthquakeListScreen> {
+  List<Map<String, String>> earthquakes = [];
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _loadEarthquakeData();  // Veriyi yüklemek için fonksiyon çağırma
+    _loadEarthquakeData();
   }
 
   Future<void> _loadEarthquakeData() async {
@@ -23,27 +23,35 @@ class _EarthquakeDataScreenState extends State<EarthquakeDataScreen> {
     });
 
     try {
-      final String xmlString = await rootBundle.loadString('assets/son_depremler.xml');  // XML dosyasını okuma
-      final document = XmlDocument.parse(xmlString);  // XML verisini çözme
+      // XML dosyasını okuyun
+      final String xmlString = await rootBundle.loadString('assets/son_depremler.xml');
+      final document = xml.XmlDocument.parse(xmlString);
 
       setState(() {
-        earthquakeData.clear();
-        final earthquakes = document.findAllElements('deprem'); // XML'deki deprem öğelerini bul
-        for (var earthquake in earthquakes) {
-          final date = earthquake.findElements('tarih').single.text;
-          final location = earthquake.findElements('yer').single.text;
-          final magnitude = earthquake.findElements('buyukluk').single.text;
+        earthquakes = document.findAllElements('text:p').map((node) {
+          final text = node.text.trim();
+          if (text.contains("Tarih Saat")) return null;
+          if (text.contains("TÜRKİYE VE YAKIN ÇEVRESİNDEKİ SON DEPREMLER")) return null;
 
-          // Veriyi listeye ekliyoruz
-          earthquakeData.add('$date: $location - Büyüklük: $magnitude');
-        }
+          // Veriyi böl ve haritaya dönüştür
+          final parts = text.split(' ');
+          return {
+            'Tarih': parts[0],
+            'Saat': parts[1],
+            'Enlem': parts[2],
+            'Boylam': parts[3],
+            'Derinlik': parts[4],
+            'Yer': parts.sublist(7).join(' '),
+          };
+        }).where((element) => element != null).cast<Map<String, String>>().toList();
+
         _isLoading = false;
       });
     } catch (e) {
+      print("Hata: $e");
       setState(() {
         _isLoading = false;
       });
-      print("Error loading earthquake data: $e");
     }
   }
 
@@ -52,21 +60,20 @@ class _EarthquakeDataScreenState extends State<EarthquakeDataScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Son Depremler'),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: _isLoading
-            ? Center(child: CircularProgressIndicator())  // Yükleme göstergesi
-            : ListView.builder(
-          itemCount: earthquakeData.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(earthquakeData[index]),  // Deprem bilgisini listele
-            );
-          },
-        ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+        itemCount: earthquakes.length,
+        itemBuilder: (context, index) {
+          final quake = earthquakes[index];
+          return ListTile(
+            title: Text("${quake['Yer']}"),
+            subtitle: Text("Tarih: ${quake['Tarih']}, Saat: ${quake['Saat']}, Büyüklük: ${quake['Derinlik']} km"),
+          );
+        },
       ),
     );
   }
 }
-// TODO Implement this library.

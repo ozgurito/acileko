@@ -40,5 +40,5 @@ flutter:
     - assets/KAT4.jpeg    # 4. Kat görseli
     - assets/KAT5.jpeg    # 5. Kat görseli
     - assets/ZEMİN.jpeg   # Zemin kat görseli
-    - assets/son depremler.xml
+    - assets/son_depremler.xml
     - assets/IEU.png

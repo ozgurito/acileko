@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<office:document-content 
+  xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" 
+  xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
+  <office:body>
+    <office:text>
+      <text:p text:style-name="Text_20_body">
+        <text:span text:style-name="T1">..................TÜRKİYE VE YAKIN ÇEVRESİNDEKİ SON DEPREMLER....................</text:span>
+      </text:p>
+      <text:p text:style-name="Text_20_body">Tarih         Saat          Derinlik(km)    Şiddet      Yer</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    21:05:04     8.5            1.7          DURASILLI-SALIHLI (MANISA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    20:53:38     12.8           1.4          GULUMUSAGI-(MALATYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    20:51:03     15.1           1.2          DAMLATAS-PAZARCIK</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    20:36:23     14.5           2.1          ALANYA ACIKLARI-ANTALYA</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    20:11:22     9.0            1.9          KUSADASI KORFEZI (EGE DENIZI)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    19:59:41     8.7            2.2          EGE DENIZI</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    19:53:22     5.4            3.2          KIZILCIK-SIMAV (KUTAHYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    19:37:55     16.1           2.3          ALAN-SEMDINLI (HAKKARI)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    19:31:12     5.3            1.2          PIRIBEYLI-YUNAK (KONYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    19:15:29     7.9            1.9          AKDENIZ</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    18:50:29     21.7           1.6          AGACLI-GURUN (SIVAS)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    18:36:10     9.7            2.1          ALANYA (ANTALYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    18:35:23     5.0            1.6          KELEKCI-DICLE (DIYARBAKIR)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    18:22:17     16.8           1.5          BUYUKCAMURLU-GOKSUN</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:40:05     13.1           1.2          KARAPINAR-CAL (DENIZLI)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:33:26     5.0            3.4          GIRIT ADASI (AKDENIZ)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:25:07     12.7           1.8          TOSMUR-ALANYA (ANTALYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:23:51     20.6           1.1          ALANYA (ANTALYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:21:53     17.6           1.9          TOSMUR-ALANYA (ANTALYA)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    17:19:28     10.8           1.6          CALIS-ELBISTAN (KAHRAMANMARAS)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    16:58:33     13.3           1.9          ESENKOY-GOKSUN</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    16:51:03     12.0           4.6          ALANYA ACIKLARI-ANTALYA</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    16:39:52     9.2            2.3          TEKIR-(KAHRAMANMARAS)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    16:31:27     9.4            1.8          GURLEYIK-HONAZ (DENIZLI)</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    16:04:35     2.5            3.0          GUMUSDOVEN-ELBISTAN</text:p>
+      <text:p text:style-name="Text_20_body">2025.01.03    15:31:20     9.1            1.2          DENIZLI-PAZARCIK</text:p>
+    </office:text>
+  </office:body>
+</office:document-content>

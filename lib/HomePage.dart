@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'earthquake_data_screen.dart'; // EarthquakeDataScreen import ediyoruz
+import 'earthquake_list_screen.dart' ;
 import 'exit_plan_screen.dart';  // Acil çıkış planı sayfası
 import 'earthquake_prediction_screen.dart';  // Deprem tahmini ekranı
 import 'chatbot_screen.dart';    // Chatbot ekranını import ediyoruz
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                     // Son depremler ekranına yönlendirme
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EarthquakeDataScreen()),
+                      MaterialPageRoute(builder: (context) => EarthquakeTableScreen()),
                     );
                   },
                 ),
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _buildMenuButton(
                   context,
-                  'ChatBot Mesaj yaz..',
+                  'ChatBot Asistanı',
                   Icons.chat,
                       () {
                     // Chatbot ekranına geçiş
