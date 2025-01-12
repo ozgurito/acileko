@@ -13,9 +13,9 @@ class ExitPlanScreen extends StatelessWidget {
             children: [
               Text('Uygun çıkış: $exitName'),
               Text('Alternatif çıkış: $alternativeExit'),
-              Text('Sınıf Kapasitesi: $capacity kişi'),
-              Text('Uygun çıkışdan bir kişi için tahmini tahliye süresi (saniye): $timeExit'),
-              Text('Alternatif çıkışdan bir kişi için tahmini tahliye süresi (saniye): $timeAlternativeExit'),
+              Text('Tahmini Sınıf Mevcudu: $capacity kişi'),
+              Text('Uygun çıkışdan tahmini kat tahliye süresi (saniye): $timeExit'),
+              Text('Alternatif çıkışda tahmini kat tahliye süresi (saniye): $timeAlternativeExit'),
               SizedBox(height: 20),
               Text('Acil durumlar için önerilen çıkış planı şu şekildedir:'),
               Text('1. Sınıfın kapasitesine göre en hızlı çıkışı kullanın.'),
@@ -362,33 +362,33 @@ class ExitPlanScreen extends StatelessWidget {
     } else if (room == "DERSLİK M101") {
     exitName = "Büyük Merdiven";
     alternativeExit = "Küçük Merdiven";
-    capacity = 40;
-    timeExit = 100;
-    timeAlternativeExit = 120;
+    capacity = 35;
+    timeExit = 119;
+    timeAlternativeExit = 122;
     } else if (room == "DERSLİK M102") {
     exitName = "Küçük Merdiven";
     alternativeExit = "Büyük Merdiven";
     capacity = 35;
-    timeExit = 105;
-    timeAlternativeExit = 125;
+    timeExit = 122;
+    timeAlternativeExit = 119;
     } else if (room == "DERSLİK M103") {
-    exitName = "Büyük Merdiven";
-    alternativeExit = "Küçük Merdiven";
-    capacity = 45;
-    timeExit = 95;
-    timeAlternativeExit = 115;
+    exitName = "Küçük Merdiven";
+    alternativeExit = "Büyük Merdiven";
+    capacity = 35;
+    timeExit = 122;
+    timeAlternativeExit = 119;
     } else if (room == "DERSLİK M104") {
     exitName = "Küçük Merdiven";
     alternativeExit = "Büyük Merdiven";
-    capacity = 40;
-    timeExit = 100;
-    timeAlternativeExit = 120;
+    capacity = 35;
+    timeExit = 122;
+    timeAlternativeExit = 119;
     } else if (room == "DERSLİK M105") {
     exitName = "Büyük Merdiven";
     alternativeExit = "Küçük Merdiven";
-    capacity = 50;
-    timeExit = 90;
-    timeAlternativeExit = 110;
+    capacity = 35;
+    timeExit = 119;
+    timeAlternativeExit = 122;
     } else if (room == "DERSLİK M106") {
     exitName = "Küçük Merdiven";
     alternativeExit = "Büyük Merdiven";
