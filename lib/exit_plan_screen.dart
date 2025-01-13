@@ -326,39 +326,39 @@ class ExitPlanScreen extends StatelessWidget {
     } else if (room == "DERSLİK M201") {
     exitName = "Büyük Merdiven";
     alternativeExit = "Küçük Merdiven";
-    capacity = 40;
-    timeExit = 100;
-    timeAlternativeExit = 120;
+    capacity = 38;
+    timeExit = 117;
+    timeAlternativeExit = 132;
     } else if (room == "DERSLİK M202") {
     exitName = "Küçük Merdiven";
     alternativeExit = "Büyük Merdiven";
-    capacity = 35;
-    timeExit = 105;
-    timeAlternativeExit = 125;
+    capacity = 38;
+    timeExit = 132;
+    timeAlternativeExit = 117;
     } else if (room == "DERSLİK M203") {
-    exitName = "Büyük Merdiven";
-    alternativeExit = "Küçük Merdiven";
-    capacity = 45;
-    timeExit = 95;
-    timeAlternativeExit = 115;
+    exitName = "Küçük Merdiven";
+    alternativeExit = "Büyük Merdiven";
+    capacity = 38;
+    timeExit = 132;
+    timeAlternativeExit = 117;
     } else if (room == "DERSLİK M204") {
     exitName = "Küçük Merdiven";
     alternativeExit = "Büyük Merdiven";
-    capacity = 40;
-    timeExit = 100;
-    timeAlternativeExit = 120;
+    capacity = 38;
+    timeExit = 132;
+    timeAlternativeExit = 117;
     } else if (room == "DERSLİK M205") {
     exitName = "Büyük Merdiven";
     alternativeExit = "Küçük Merdiven";
-    capacity = 50;
-    timeExit = 90;
-    timeAlternativeExit = 110;
+    capacity = 38;
+    timeExit = 117;
+    timeAlternativeExit = 132;
     } else if (room == "DERSLİK M206") {
-    exitName = "Küçük Merdiven";
-    alternativeExit = "Büyük Merdiven";
-    capacity = 45;
-    timeExit = 95;
-    timeAlternativeExit = 115;
+    exitName = "Büyük Merdiven";
+    alternativeExit = "Küçük Merdiven";
+    capacity = 38;
+    timeExit = 117;
+    timeAlternativeExit = 132;
     } else if (room == "DERSLİK M101") {
     exitName = "Büyük Merdiven";
     alternativeExit = "Küçük Merdiven";
